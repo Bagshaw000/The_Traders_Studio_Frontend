@@ -4,7 +4,9 @@ import ellipse from "@/public/auth/Ellipse 1.svg";
 import slide from "@/public/auth/Slide.svg";
 import target from "@/public/auth/target.svg";
 import slider from "@/public/auth/Slider.svg";
-import logo from "@/public/TTS PNG-01.svg";
+import logo from "@/public/logo.svg"
+
+import land from "@/public/auth/land.png";
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -26,13 +28,13 @@ export default function AuthenticationLayout({
     <div>
       <div>
         <div className="flex flex-row w-screen justify-between h-screen items-center p-7!">
-          <div className=" w-[45%] h-full bg-[#01113F] rounded-3xl relative z-0 ">
+          <div  style={{ backgroundImage: `url(${land.src})` }}  className=" w-[45%] h-full bg-center bg-cover  rounded-3xl relative z-0 ">
             <Image
               src={logo}
               alt={""}
               className="absolute top-[3%] left-[3%] scale-80"
             />
-            <div className="absolute h-full z-1 w-full">
+            {/* <div className="absolute h-full z-1 w-full">
               <Image
                 src={ellipse}
                 alt={""}
@@ -58,7 +60,7 @@ export default function AuthenticationLayout({
                 alt={""}
                 className="absolute top-[54%] scale-90 w-full"
               />
-            </div>
+            </div> */}
 
             <div className="text-center font-primary z-10 text-blue-100 absolute bottom-[7%] w-full ">
               <h1 className="text-5xl!  font-medium! ">

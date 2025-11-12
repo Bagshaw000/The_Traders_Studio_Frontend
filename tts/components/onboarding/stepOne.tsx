@@ -10,11 +10,11 @@ export default function StepOne() {
     
   return (
     <div className="w-full h-fit">
-      <RadioGroup defaultChecked = {true} defaultValue="1" onValueChange={(value) =>setTradingPeriod(value)}>
-        <div className="flex flex-row justify-between border-[0.5px]! mb-2! border-[#DDDDDD]! w-[inherit] rounded-lg px-3! py-2!">
+      <RadioGroup defaultChecked = {true}  onValueChange={(value) =>setTradingPeriod(value)}>
+        <div className="flex flex-row justify-between border-[0.5px]! border-[#DDDDDD]! w-[inherit] rounded-lg px-3! py-2!">
           <div className="justify-start text-start">
             <p className="font-semibold">I'm just getting started</p>
-            <p className="text-sm">Less than a year</p>
+            <p className="text-sm!">Less than a year</p>
           </div>
 
           <RadioGroupItem
@@ -26,10 +26,10 @@ export default function StepOne() {
           />
         </div>
 
-        <div className="flex flex-row justify-between border-[0.5px]!  mb-2! border-[#DDDDDD]! w-[inherit] rounded-lg px-3! py-2!">
+        <div className="flex flex-row justify-between border-[0.5px]!  border-[#DDDDDD]! w-[inherit] rounded-lg px-3! py-2!">
           <div className="justify-start text-start">
             <p className="font-semibold">Finding my rhythm</p>
-            <p className="text-sm">1-3 years</p>
+            <p className="text-sm!">1-3 years</p>
           </div>
 
           <RadioGroupItem
@@ -41,10 +41,10 @@ export default function StepOne() {
           />
         </div>
 
-        <div className="flex flex-row justify-between border-[0.5px]! mb-2! border-[#DDDDDD]! w-[inherit] rounded-lg px-3! py-2!">
+        <div className="flex flex-row justify-between border-[0.5px]!  border-[#DDDDDD]! w-[inherit] rounded-lg px-3! py-2!">
           <div className="justify-start text-start">
             <p className="font-semibold">Trading with Confidence</p>
-            <p className="text-sm">3-5 years</p>
+            <p className="text-sm!">3-5 years</p>
           </div>
 
           <RadioGroupItem
@@ -59,7 +59,7 @@ export default function StepOne() {
         <div className="flex flex-row justify-between border-[0.5px]! border-[#DDDDDD]! w-[inherit] rounded-lg px-3! py-2!">
           <div className="justify-start text-start">
             <p className="font-semibold">Seasoned Market Pro</p>
-            <p className="text-sm">5+ years</p>
+            <p className="text-sm!">5+ years</p>
           </div>
 
           <RadioGroupItem

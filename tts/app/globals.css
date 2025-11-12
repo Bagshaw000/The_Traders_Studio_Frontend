@@ -2,7 +2,6 @@
 @import url('https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 /* 2️⃣ Import Tailwind and animation layers */
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -135,4 +134,36 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Hide the clock icon on Chrome, Edge, Safari */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Hide the space reserved for the icon */
+input[type="time"]::-webkit-inner-spin-button,
+input[type="time"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Firefox */
+input[type="time"]::-moz-focus-inner {
+  border: 0;
+}
+
+/* Hide the clock icon on Chrome, Edge, Safari */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Hide the space reserved for the icon */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Firefox */
+input[type="date"]::-moz-focus-inner {
+  border: 0;
 }

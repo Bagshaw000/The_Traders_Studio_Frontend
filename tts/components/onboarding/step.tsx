@@ -6,26 +6,46 @@ import StepOne from "./stepOne";
 import StepTwo from "./stepTwo";
 import StepThree from "./stepThree";
 import StepFour from "./stepFour";
+import { useEffect } from "react";
+import { redirect } from "next/navigation";
 
 export default function Step() {
-  let { setStep, step, tradingPeriod } = onboardingStore();
-  console.log(step);
+  let { setStep, step, tradingPeriod, platform, goal, traderType, reset } =
+    onboardingStore();
+
   const handleSubmit = () => {
     const newStep = step + 1;
 
     setStep(newStep);
+
+    if (step == 4) {
+      if (
+        tradingPeriod == "" ||
+        platform == "" ||
+        goal == "" ||
+        traderType == ""
+      ) {
+        // Alert they should choose all
+      } else {
+        reset();
+        redirect("/dashboard");
+      }
+    }
   };
 
   const handleBack = () => {
     const newStep = step - 1;
     setStep(newStep);
   };
+
+  // useEffect(()=>{
+  //   console.log(onboardingStore())
+  // })
   return (
-    <div className=" w-[70%] h-[80%] bg-white! opacity-[96.47%]! border-[#A7A7A7]! border! m-auto! flex justify-center rounded-3xl">
-      <div className="m-auto! w-[40%] max-w-[400px] h-[70%] p-auto! text-center">
+    <div className=" w-[70%] h-[80%] bg-white! opacity-[96.47%]!   m-auto! flex justify-center rounded-3xl">
+      <div className="m-auto! w-[40%] max-w-[500px] h-[70%] p-auto! text-center">
         {step == 1 ? (
           <div>
-            {" "}
             <h2 className=" font-semibold! text-2xl!">
               How long have you been trading?
             </h2>
@@ -35,7 +55,6 @@ export default function Step() {
           </div>
         ) : step == 2 ? (
           <div>
-            {" "}
             <h2 className=" font-semibold! text-2xl!">
               What kind of trader are you?
             </h2>
@@ -46,7 +65,6 @@ export default function Step() {
           </div>
         ) : (
           <div>
-            {" "}
             <h2 className=" font-semibold! text-2xl!">
               What's your main goal right now
             </h2>
@@ -61,7 +79,7 @@ export default function Step() {
             {Array.from({ length: 4 }, (_, i) =>
               step == i + 1 ? (
                 <div
-                  className="h-2! w-4! rounded-2xl bg-[#3A53C6]! mr-1!"
+                  className="h-2! w-5! rounded-2xl bg-[#3A53C6]! mr-1!"
                   key={i}
                 ></div>
               ) : (
