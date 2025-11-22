@@ -16,7 +16,7 @@ export const theme = {
     },
     fontFamily: {
         haas: ['"Neue Haas Grotesk Display Pro"', "sans-serif"],
-        urbanist: ["var(--font-urbanist)", 'sans-serif'],
+        urbanist: ["var(--font-urbanist)"],
       },
 };
 export const plugins = [];

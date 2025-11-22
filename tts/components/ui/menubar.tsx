@@ -11,7 +11,7 @@ export default function MenuBar() {
   let { step } = sideBarStore();
   const [not, setNot] = useState<boolean>(false);
   return (
-    <div className="bg-white! mb-7! border-[0.5px]! border-[#DDDDDD]! px-5! py-4! rounded-2xl w-[inherit]! flex flex-row justify-between items-center">
+    <div className="bg-white! sticky! mb-7! border-[0.5px]! border-[#DDDDDD]! px-5! py-4! rounded-2xl w-[inherit]! flex flex-row justify-between items-center">
       <div className="text-2xl! font-semibold text-[#222222]!">
         {step == 1 ? (
           <>Dashboard</>

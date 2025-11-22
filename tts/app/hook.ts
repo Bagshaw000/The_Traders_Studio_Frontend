@@ -49,53 +49,66 @@ export const forgotPasswordStore = create<ForgotPasswordState>()((set) => ({
 interface IOnboarding {
   step: number;
   tradingPeriod: string;
-  traderType:string;
-  goal:string,
-  platform:string
-}
-
-enum TraderType {
-  day="day",
-  swing="swing",
-  position="position",
-  algo="algo"
+  traderType: string;
+  goal: string;
+  platform: string;
 }
 
 const onboardingIntialState: IOnboarding = {
   step: 0,
   tradingPeriod: "",
   traderType: "",
-  goal:"",
-  platform:"",
+  goal: "",
+  platform: "",
 };
 type OnboardingState = typeof onboardingIntialState & {
   reset: () => void;
   setStep: (index: number) => void;
-  setTradingPeriod:(period:string)=> void;
-  setTraderType:(trader: string)=> void;
-  setGoal:(goal:string)=> void;
-  setPlatform:(plat:string)=> void;
+  setTradingPeriod: (period: string) => void;
+  setTraderType: (trader: string) => void;
+  setGoal: (goal: string) => void;
+  setPlatform: (plat: string) => void;
 };
 
 export const onboardingStore = create<OnboardingState>()((set) => ({
   ...onboardingIntialState,
   reset: () => set(onboardingIntialState),
   setStep: (index) => set(() => ({ step: index })),
-  setTradingPeriod: (period) => set(()=> ({tradingPeriod:period})),
-  setTraderType:(trader) => set(()=>({traderType:trader})),
-  setGoal:(traderGoal)=>set(()=>({goal:traderGoal})),
-  setPlatform:(plat)=>set(()=>({platform:plat}))
+  setTradingPeriod: (period) => set(() => ({ tradingPeriod: period })),
+  setTraderType: (trader) => set(() => ({ traderType: trader })),
+  setGoal: (traderGoal) => set(() => ({ goal: traderGoal })),
+  setPlatform: (plat) => set(() => ({ platform: plat })),
 }));
 
-const sideBarInitialState:IForgotPassword = {
-  step:1
-}
+const sideBarInitialState: IForgotPassword = {
+  step: 1,
+};
 
 type sideBarState = typeof sideBarInitialState & {
   setPage: (pageIndex: number) => void;
+};
+
+export const sideBarStore = create<sideBarState>()((set) => ({
+  ...sideBarInitialState,
+  setPage: (pageIndex) => set(() => ({ step: pageIndex })),
+}));
+
+interface ITradingAccount {
+  name: string;
+  platform: string;
+  id: string;
 }
 
-export const sideBarStore = create<sideBarState>()((set)=> (
- { ...sideBarInitialState,
-  setPage: (pageIndex) => set(()=>({step: pageIndex}))
-}))
+interface IArrayTradingAccount {
+  accounts: Array<ITradingAccount>;
+}
+const tradingAccountsInitialState: IArrayTradingAccount = { accounts: [] };
+
+type tradingAccountsState = typeof tradingAccountsInitialState & {
+  setAccounts: (accounts: ITradingAccount) => void;
+};
+
+export const tradingAccountStore = create<tradingAccountsState>()((set) => ({
+  ...tradingAccountsInitialState,
+  setAccounts: (acc:ITradingAccount) => set((state)=> ({accounts:[...state.accounts, acc] }))
+}));

@@ -19,7 +19,7 @@ import ctrader from "@/public/ctraderSquare.png";
 import matchtrader from "@/public/matcht.png";
 import Link from "next/link";
 import Active from "@/public/ActiveIcon.svg";
-import { sideBarStore } from "@/app/hook";
+import { sideBarStore, tradingAccountStore } from "@/app/hook";
 import Home from "@/public/home.svg";
 import Trade from "@/public/coins-dollar.svg";
 import Journal from "@/public/note.svg";
@@ -31,6 +31,9 @@ import Help from "@/public/headphones.svg"
 export default function SideBar() {
   const [sidebarState, setSidebarState] = useState<boolean>(true);
   let { setPage, step } = sideBarStore();
+  let {accounts,setAccounts} = tradingAccountStore()
+
+
 
   const changeSideBarState = () => {
     setSidebarState(!sidebarState);
@@ -40,7 +43,7 @@ export default function SideBar() {
     setPage(pageIndex);
   };
   return sidebarState == true ? (
-    <div className="w-74! h-[95vh] relative  bg-white! border-[0.5px]! border-[#DDDDDD]! rounded-lg!">
+    <div className="w-74! h-[95vh]  fixed  font-urbanist!  bg-white! border-[0.5px]! border-[#DDDDDD]! rounded-lg!">
       <div className=" flex flex-row justify-between items-center mx-5! my-4!">
         <Image src={logo} alt={""} />
         <Button onClick={changeSideBarState}>
@@ -62,21 +65,46 @@ export default function SideBar() {
               <SelectGroup className="bg-white! px-2! py-3! rounded-sm! mt-3!">
                 <div className="flex flex-row justify-between">
                   <SelectLabel>Accounts</SelectLabel>{" "}
-                  <span className="text-sm!">01</span>
+                  <span className="text-sm!">{accounts.length!}</span>
                 </div>
-
-                <SelectItem
+                {
+                  accounts.length > 0 ? accounts.map((acc)=>
+                    <SelectItem
                   value="mt5"
                   className="h-9! text-xs! text-[#414141]!"
                 >
                   <div className="flex flex-row h-[inherit]! items-center px-1! ">
                     <div
-                      className=" w-8! h-8!  bg-cover bg-center mr-2!"
-                      style={{ backgroundImage: `url(${mt5.src})` }}
-                    ></div>
-                    <span className="">Account 1</span>
+                      className=" w-6! h-6!  bg-cover bg-center mr-2! relative! p-1! rounded-full bg-white! drop-shadow-md!"
+                      // style={{ backgroundImage: `url(${mt5.src})` }}
+                    >
+                      <div className="w-2.5! h-2.5! rounded-full bg-[#3A53C6]! top-0! left-0! relative!">
+
+                      </div>
+                      <div className="w-1! h-1! rounded-full bg-[#3A53C6]! bottom-0! left-2.5! relative!"></div>
+                    </div>
+                    <span className="">{acc.name}</span>
                   </div>
                 </SelectItem>
+                  ): <SelectItem
+                  value="mt5"
+                  className="h-9! text-xs! text-[#414141]!"
+                >
+                  <div className="flex flex-row h-[inherit]! items-center px-1! ">
+                    <div
+                      className=" w-6! h-6!  bg-cover bg-center mr-2! relative! p-1! rounded-full bg-white! drop-shadow-md!"
+                      // style={{ backgroundImage: `url(${mt5.src})` }}
+                    >
+                      <div className="w-2.5! h-2.5! rounded-full bg-[#3A53C6]! top-0! left-0! relative!">
+
+                      </div>
+                      <div className="w-1! h-1! rounded-full bg-[#3A53C6]! bottom-0! left-2.5! relative!"></div>
+                    </div>
+                    <span className="">No account </span>
+                  </div>
+                </SelectItem>
+                }
+                
 
                 <Button className="w-full  border-[#DDDDDD]! border-[0.5px]! rounded-lg! mt-5!">
                   <div className="text-[#3A53C6]! text-sm!">
@@ -256,7 +284,7 @@ export default function SideBar() {
                     PRO
                   </span>
                 </span>
-                <p className="text-sm! mt-2! text-[#686868]">
+                <p className="text-sm/tight  mt-2! text-[#686868]">
                   Gain access to advanced analytics, and deeper insights to make
                   confident moves
                 </p>

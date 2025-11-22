@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Urbanist } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 const urbanist = Urbanist({
   subsets: ["latin"],
+   weight: ["100","200","300","400","500","600","700","800","900"],
   variable: "--font-urbanist",
 });
 
@@ -29,14 +31,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={urbanist.variable}>
+    <html lang="en" >
       <head>
        
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${urbanist.variable} font-sans  antialiased`}
+        className={`${geistSans.variable} ${urbanist.variable} ${geistMono.variable} ${urbanist.variable} font-sans  antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
