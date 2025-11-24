@@ -23,8 +23,10 @@ import Mt5Connect from "./mt5Connect";
 import { useState } from "react";
 import { TfiClose } from "react-icons/tfi";
 import MatchTaderConnect from "./matchTraderConnect";
+import { connectAccountStore } from "@/app/hook";
 
 export default function Portfolio() {
+  const { setPlatform } = connectAccountStore();
   return (
     <div className="w-full">
       <div className="flex-row hidden justify-between mb-6!">
@@ -91,7 +93,7 @@ export default function Portfolio() {
                 </DialogHeader>
                 <div className="mt-0!">
                   {/* <Mt5Connect /> */}
-                      <MatchTaderConnect platform="mt5" />
+                  <MatchTaderConnect platform="mt5" />
                 </div>
               </DialogContent>
             </form>
@@ -108,11 +110,39 @@ export default function Portfolio() {
           <span className="mb-12! font-urbanist text-xs! mt-2! text-[#686868]">
             All trades (live and past)
           </span>
-
-          <Button className="bg-[#F8F9F9]! rounded-lg! w-full! text-[#3A53C6]! py-5! text-sm! font-medium!">
-            {" "}
-            Connect account
-          </Button>
+          <Dialog>
+            <form>
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="bg-[#F8F9F9]! rounded-lg! w-full! text-[#3A53C6]! py-5! text-sm! font-medium!"
+                >
+                  Connect account
+                </Button>
+              </DialogTrigger>
+              <DialogContent
+                showCloseButton={false}
+                className=" relative! sm:max-w-[700px] min-h-[400px] py-5! px-8! bg-white!"
+              >
+                <DialogHeader className="h-fit! flex flex-row justify-between">
+                  <DialogTitle className="flex text-xl! items-center h-fit! font-semibold!">
+                    <Image className="mr-2!" src={mt5} alt="" /> MetaTrader 4 (MT4)
+                  </DialogTitle>
+                  <DialogClose asChild className="">
+                    <Button className="bg-[#F2F2F2]! rounded-full! p-2! h-fit">
+                      <TfiClose
+                        style={{ color: "#222222" }}
+                        className="scale-75"
+                      />
+                    </Button>
+                  </DialogClose>
+                </DialogHeader>
+                <div className="">
+                  <MatchTaderConnect platform="mt4" />
+                </div>
+              </DialogContent>
+            </form>
+          </Dialog>
         </div>
 
         <div className="flex flex-col item-start border-[#DDDDDD]! border-[0.5px]! rounded-sm!  bg-white w-[23%] p-4!">
@@ -143,7 +173,7 @@ export default function Portfolio() {
             All trades (live and past)
           </span>
 
-         <Dialog>
+          <Dialog>
             <form>
               <DialogTrigger asChild>
                 <Button
@@ -159,8 +189,8 @@ export default function Portfolio() {
               >
                 <DialogHeader className="h-fit! flex flex-row justify-between">
                   <DialogTitle className="flex text-xl! items-center h-fit! font-semibold!">
-                    <Image className="mr-2!" src={matchTrade} alt="" /> Match Trader
-                 
+                    <Image className="mr-2!" src={matchTrade} alt="" /> Match
+                    Trader
                   </DialogTitle>
                   <DialogClose asChild className="">
                     <Button className="bg-[#F2F2F2]! rounded-full! p-2! h-fit">

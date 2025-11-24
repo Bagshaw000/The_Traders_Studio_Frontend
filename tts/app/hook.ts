@@ -110,5 +110,30 @@ type tradingAccountsState = typeof tradingAccountsInitialState & {
 
 export const tradingAccountStore = create<tradingAccountsState>()((set) => ({
   ...tradingAccountsInitialState,
-  setAccounts: (acc:ITradingAccount) => set((state)=> ({accounts:[...state.accounts, acc] }))
+  setAccounts: (acc: ITradingAccount) =>
+    set((state) => ({ accounts: [...state.accounts, acc] })),
 }));
+
+interface IConnectAccount {
+  login: string | null | number;
+  platform: string| null;
+  serverName: string | null;
+  password: string | null;
+}
+
+
+const connectAccountInitialState : IConnectAccount ={
+  login: null,
+  platform: null,
+  serverName: null,
+  password: null
+}
+
+type connectAccountState = typeof connectAccountInitialState & {
+  setPlatform:(plat: string)=> void;
+}
+
+export const connectAccountStore = create <connectAccountState>()((set)=> ({
+  ...connectAccountInitialState,
+  setPlatform: (plat:string)=> set((state)=> ({platform: plat}))
+}))

@@ -24,10 +24,10 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
   const [mtSteps, setMtSteps] = useState<number>(0);
   const [autoSync, setAutoSync] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
-  const [accDetail, setAccDetail] = useState<number>();
-  const [serverName, setServerName] = useState<string>("");
+  const [accDetail, setAccDetail] = useState<number | null>(null);
+  const [serverName, setServerName] = useState<string | null>(null);
   const [portSteps, setPortSteps] = useState<number>(0);
-  const [portName, setPortName] = useState<string>("");
+  const [portName, setPortName] = useState<string | null>(null);
   let { setStep } = authSetupStore();
 
   let fileRef = useRef<HTMLInputElement>(null);
@@ -58,7 +58,30 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
     if (mtSteps == 0 && portSteps == 0) {
       setMtSteps(1);
     } else {
-      setPortSteps(1);
+      if (portSteps == 0) {
+        if (portName == null) {
+          toast("Enter your portfolio name");
+        } else {
+          setPortSteps(1);
+        }
+      } else {
+        console.log("Lets go");
+        if (autoSync == true) {
+          if (serverName == null || accDetail == null || password == "") {
+            //Alert
+            console.log(password)
+            toast.warning("Ensure all inputs fields are filled");
+          } else {
+            // Sent the api request to the backend
+          }
+        } else {
+          if (fileRef == null || mt5CsvFile == null) {
+            toast.warning("Upload file");
+          } else {
+            //Send api call
+          }
+        }
+      }
     }
   };
   const chooseConnection = (e: string) => {
@@ -89,13 +112,13 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
                  data-[state=checked]:bg-[#3A53C6]!  data-[state=checked]:text-[#3A53C6]! "
               />
               <div className="flex flex-col items-center ">
-                <div className="p-2! rounded-full! bg-[#F9F9F9]! mb-5! w-fit">
-                  <Image src={db} alt="" />
+                <div className="p-3! rounded-full! bg-[#F9F9F9]! mb-5! w-fit">
+                  <Image src={db} alt="scale-150" />
                 </div>
                 <div className="flex flex-col mb-15! items-center">
-                  <span className="mb!">Auto Sync</span>
+                  <span className="mb! font-medium">Auto Sync</span>
                   <span className="text-[#686868]!  w-[80%] text-center text-xs! font-urbanist">
-                    Automatically sync your portfolio with the excahnge
+                    Automatically sync your portfolio with the exchange
                   </span>
                 </div>
               </div>
@@ -108,11 +131,11 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
                  data-[state=checked]:bg-[#3A53C6]!  data-[state=checked]:text-[#3A53C6]! "
               />
               <div className="flex flex-col items-center w-full">
-                <div className="p-2! rounded-full! bg-[#F9F9F9]! mb-5! w-fit">
-                  <Image src={upload} alt="" />
+                <div className="p-4! rounded-full! bg-[#F9F9F9]! mb-5! w-fit">
+                  <Image src={upload} alt="" className="scale-150 filter-[brightness(0)_invert(100%)_sepia(0%)_saturate(0%)_hue-rotate(225deg)_brightness(0%)_contrast(100%)]" />
                 </div>
                 <div className="flex flex-col mb-10! items-center">
-                  <span className="mb!">File upload</span>
+                  <span className="mb! font-medium">File upload</span>
                   <span className="text-[#686868]!  w-full text-center text-xs! font-urbanist">
                     Upload your trade files
                   </span>
@@ -268,6 +291,8 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
                       <Input
                         type="text"
                         value={profileColor}
+                        maxLength={7}
+                        onChange={(e)=> {setProfileColor(e.target.value)}}
                         className="w-20 h-7! border-[0.5px]! text-xs! text-center rounded-xs! text-[#3F3F3F] border-[#F7F7F7]!"
                       />
                     </div>
@@ -276,8 +301,6 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
               </div>
             ) : autoSync == true ? (
               platform == "match" ? (
-                <></>
-              ) : platform == "mt5" ? (
                 <div className="mt-5!">
                   <div className="mb-4!">
                     <span className="text-sm! mb-2! font-semibold text-[#222121]!">
@@ -286,7 +309,43 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
                     </span>
                     <Input
                       type="number"
-                      placeholder="Enter your portfolio name here"
+                      placeholder="Enter your account id"
+                      onChange={(e) => setAccDetail(parseInt(e.target.value))}
+                      className="font-urbanist! text-xs! px-5!  text-[#BDBDBD]! border-[#DDDDDD]! border-[0.5px]! rounded-sm!"
+                    />
+                  </div>
+
+                  <div className="mb-4!">
+                    <span className="text-sm! mb-2! font-semibold text-[#222121]!">
+                      Broker url{" "}
+                    </span>
+                    <Input
+                      type="text"
+                      placeholder="Enter your broker url"
+                      onChange={(e) => setServerName(e.target.value)}
+                      className="font-urbanist! text-xs! px-5!  text-[#BDBDBD]! border-[#DDDDDD]! border-[0.5px]! rounded-sm!"
+                    />
+                  </div>
+                  <div>
+                    <span className="text-sm! mb-2! font-semibold text-[#222121]!">
+                      Password
+                    </span>
+                    <PasswordField
+                      value={password!}
+                      onChange={(e) => setPassword(e.target.value)}
+                    ></PasswordField>
+                  </div>
+                </div>
+              ) : platform == "mt5" || platform == "mt4"? (
+                <div className="mt-5!">
+                  <div className="mb-4!">
+                    <span className="text-sm! mb-2! font-semibold text-[#222121]!">
+                      {" "}
+                      Account details
+                    </span>
+                    <Input
+                      type="number"
+                      placeholder="Enter your account id"
                       onChange={(e) => setAccDetail(parseInt(e.target.value))}
                       className="font-urbanist! text-xs! px-5!  text-[#BDBDBD]! border-[#DDDDDD]! border-[0.5px]! rounded-sm!"
                     />
@@ -298,7 +357,7 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
                     </span>
                     <Input
                       type="text"
-                      placeholder="Enter your portfolio name here"
+                      placeholder="Enter your server name"
                       onChange={(e) => setServerName(e.target.value)}
                       className="font-urbanist! text-xs! px-5!  text-[#BDBDBD]! border-[#DDDDDD]! border-[0.5px]! rounded-sm!"
                     />
@@ -308,13 +367,11 @@ export default function MatchTaderConnect({ platform }: { platform: string }) {
                       Password
                     </span>
                     <PasswordField
-                      value={password}
+                      value={password!}
                       onChange={(e) => setPassword(e.target.value)}
                     ></PasswordField>
                   </div>
                 </div>
-              ) : platform == "mt4" ? (
-                <></>
               ) : platform == "ctrader" ? (
                 <></>
               ) : (
