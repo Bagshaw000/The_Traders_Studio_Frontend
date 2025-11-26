@@ -447,7 +447,7 @@ export default function Account() {
         </div>
         <div className="rounded-lg overflow-hidden border-[0.5px]! border-[#DDDDDD]! text-[#777777]!">
           <Table className="font-urbanist ">
-            <TableHeader className="border-b! border-[#E8E8E8]! border-[0.5px]! ">
+            <TableHeader className=" border-[#E8E8E8]! border-b-[0.5px]! ">
               <TableRow>
                 <TableHead className="px-4! py-3! text-[#777777]!">
                   Symbol
