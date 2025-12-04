@@ -114,7 +114,7 @@ export default function TradeList() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow onClick={()=>{redirect("/dashboard/trades/details?tradeId=1111111")}} className="py-3.5 text-[#333333]! border-b-[0.5px]! border-b-[#DDDDDD]!">
+              <TableRow onClick={()=>{redirect("/dashboard/trades/details?tradeId=1111111&from=trade")}} className="py-3.5 text-[#333333]! border-b-[0.5px]! border-b-[#DDDDDD]!">
                 <TableCell className="px-4! py-3!">INV001</TableCell>
                 <TableCell className="px-4! py-3!">
                   {" "}

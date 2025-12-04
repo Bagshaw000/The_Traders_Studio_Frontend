@@ -20,7 +20,7 @@ export default function MenuBar() {
         ) : step == 3 ? (
           <>Journal</>
         ) : step == 4 ? (
-          <>Integrity</>
+          <>Insight</>
         ) : step == 5 ? (
           <> Settings</>
         ) : (

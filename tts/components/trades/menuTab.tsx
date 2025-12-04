@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 
 export default function MenuTab() {
   return (
-    <div className="w-full  flex flex-row justify-between">
+    <div className="w-full  flex flex-row justify-between mb-5!">
       <div className="flex flex-row mr">
         <DateFilter />
         <div className="flex ml-2! items-center text-[#767676] border-[0.5px]! border-[#ECEAEA]! rounded-md! bg-white! w-50!">

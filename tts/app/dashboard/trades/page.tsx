@@ -6,6 +6,6 @@ import { useState } from "react"
 export default function  Page(){
     const [trade, setTrade] = useState<boolean>(true)
     // Get user Data and check if the onboarding has happened
-    return (trade == false ? <NoTrades/>:<Trades/>
+    return (trade == false ? <NoTrades page={"trade"}/>:<Trades/>
    )
 }

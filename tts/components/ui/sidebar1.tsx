@@ -43,7 +43,7 @@ export default function SideBar() {
     setPage(pageIndex);
   };
   return sidebarState == true ? (
-    <div className="w-74! h-[95vh]  fixed  font-urbanist!  bg-white! border-[0.5px]! border-[#DDDDDD]! rounded-lg!">
+    <div className="w-74! h-[97vh]  fixed  font-urbanist!  bg-white! border-[0.5px]! border-[#DDDDDD]! rounded-lg!">
       <div className=" flex flex-row justify-between items-center mx-5! my-4!">
         <Image src={logo} alt={""} />
         <Button onClick={changeSideBarState}>
@@ -169,7 +169,7 @@ export default function SideBar() {
         </Link>
 
         <Link
-          href={""}
+          href={"/dashboard/journal"}
           className="flex flex-row mt-1!"
           onClick={() => {
             handleSideBarNavigate(3);
@@ -194,7 +194,7 @@ export default function SideBar() {
         </Link>
 
         <Link
-          href={""}
+          href={"/dashboard/insight"}
           className="flex flex-row mt-1!"
           onClick={() => {
             handleSideBarNavigate(4);

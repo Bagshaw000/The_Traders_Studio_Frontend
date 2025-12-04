@@ -1,6 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar";
 import MenuBar from "@/components/ui/menubar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import SideBar from "@/components/ui/sidebar1";
 import { steps } from "motion";
 import { NextStepProvider, NextStep } from "nextstepjs";
@@ -26,10 +24,10 @@ export default function DashboardLayout({
     },
   ];
   return (
-    <div className="flex flex-row  gap-4 p-4! relative w-full!">
-      <SideBar ></SideBar>
-      <div className=" relative ml-80! w-full! ">
-        <MenuBar/>
+    <div className="flex flex-row  gap-5! py-4! px-6! relative w-full! h-full!">
+      <SideBar></SideBar>
+      <div className=" relative ml-85! w-full! ">
+        <MenuBar />
         <main className="overflow-auto! w-full!">{children}</main>
       </div>
     </div>
