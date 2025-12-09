@@ -114,7 +114,7 @@ export default function SideBar() {
         </Select>
       </div>
 
-      <div className="mt-7! mr-5! flex flex-col max-h-[170px] h-[40%]! justify-between">
+      <div className="mt-7! mr-5! flex text-sm! flex-col max-h-[170px] h-[40%]! justify-between">
         <Link
           href={"/dashboard"}
           className="flex flex-row"
@@ -216,7 +216,7 @@ export default function SideBar() {
         </Link>
       </div>
 
-      <div className=" absolute! bottom-10!  w-[inherit]!  h-fit!">
+      <div className=" absolute! bottom-5! text-sm! w-[inherit]!  h-fit!">
         <div className="mr-5! w-[inherit] max-h-[70px] ">
           <Link
             href={"/dashboard/settings"}
