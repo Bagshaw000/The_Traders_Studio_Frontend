@@ -68,7 +68,7 @@ export default function Page() {
 
   const totalVisitors = chartData[0].desktop + chartData[0].mobile;
   return (
-    <div className="">
+    <div className="h-[inherit]!">
       <div className="flex flex-row justify-between items-end mb-8!">
         <div>
           <span className="text-2xl text-[#222222]! font-semibold ">

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 interface IAuthSetup {
   step: number;
@@ -88,10 +89,31 @@ type sideBarState = typeof sideBarInitialState & {
   setPage: (pageIndex: number) => void;
 };
 
-export const sideBarStore = create<sideBarState>()((set) => ({
+export const sideBarStore = create<sideBarState>()(persist((set,get) => ({
   ...sideBarInitialState,
   setPage: (pageIndex) => set(() => ({ step: pageIndex })),
-}));
+  
+}) ,{
+      name: 'sideBarStorage', // name of the item in the storage (must be unique)
+      storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+    },));
+
+const settingBarInitialState: IForgotPassword = {
+  step: 1,
+};
+
+type settingBarState = typeof sideBarInitialState & {
+  setPage: (pageIndex: number) => void;
+};
+
+export const settingBarStore = create<settingBarState>()(persist((set,get) => ({
+  ...settingBarInitialState,
+  setPage: (pageIndex) => set(() => ({ step: pageIndex })),
+  
+}) ,{
+      name: 'settingBarStorage', // name of the item in the storage (must be unique)
+      storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+    },));
 
 interface ITradingAccount {
   name: string;

@@ -3,7 +3,7 @@ import Image from "next/image";
 import logo from "@/public/logoblue.svg";
 import sidebar from "@/public/sidebar.svg";
 import { Button } from "./button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -24,17 +24,16 @@ import Home from "@/public/home.svg";
 import Trade from "@/public/coins-dollar.svg";
 import Journal from "@/public/note.svg";
 import Rocket from "@/public/Rocket.svg";
-import Insight from "@/public/Insight.svg"
-import Settings from "@/public/setting.svg"
-import Help from "@/public/headphones.svg"
+import Insight from "@/public/Insight.svg";
+import Settings from "@/public/setting.svg";
+import Help from "@/public/headphones.svg";
+import { redirect } from "next/navigation";
 
 export default function SideBar() {
   const [sidebarState, setSidebarState] = useState<boolean>(true);
-  let { setPage, step } = sideBarStore();
-  let {accounts,setAccounts} = tradingAccountStore()
-
-
-
+  let step = sideBarStore((state) => state.step);
+  let setPage = sideBarStore((state) => state.setPage);
+  let { accounts, setAccounts } = tradingAccountStore();
   const changeSideBarState = () => {
     setSidebarState(!sidebarState);
   };
@@ -42,8 +41,9 @@ export default function SideBar() {
     console.log(pageIndex);
     setPage(pageIndex);
   };
+
   return sidebarState == true ? (
-    <div className="w-74! h-[97vh]  fixed  font-urbanist!  bg-white! border-[0.5px]! border-[#DDDDDD]! rounded-lg!">
+    <div className=" col-span-1  row-span-4   relative! font-urbanist!  bg-white! border-[0.5px]! border-[#DDDDDD]! rounded-lg!">
       <div className=" flex flex-row justify-between items-center mx-5! my-4!">
         <Image src={logo} alt={""} />
         <Button onClick={changeSideBarState}>
@@ -67,44 +67,41 @@ export default function SideBar() {
                   <SelectLabel>Accounts</SelectLabel>{" "}
                   <span className="text-sm!">{accounts.length!}</span>
                 </div>
-                {
-                  accounts.length > 0 ? accounts.map((acc)=>
+                {accounts.length > 0 ? (
+                  accounts.map((acc) => (
                     <SelectItem
-                  value="mt5"
-                  className="h-9! text-xs! text-[#414141]!"
-                >
-                  <div className="flex flex-row h-[inherit]! items-center px-1! ">
-                    <div
-                      className=" w-6! h-6!  bg-cover bg-center mr-2! relative! p-1! rounded-full bg-white! drop-shadow-md!"
-                      // style={{ backgroundImage: `url(${mt5.src})` }}
+                      value="mt5"
+                      className="h-9! text-xs! text-[#414141]!"
                     >
-                      <div className="w-2.5! h-2.5! rounded-full bg-[#3A53C6]! top-0! left-0! relative!">
-
+                      <div className="flex flex-row h-[inherit]! items-center px-1! ">
+                        <div
+                          className=" w-6! h-6!  bg-cover bg-center mr-2! relative! p-1! rounded-full bg-white! drop-shadow-md!"
+                          // style={{ backgroundImage: `url(${mt5.src})` }}
+                        >
+                          <div className="w-2.5! h-2.5! rounded-full bg-[#3A53C6]! top-0! left-0! relative!"></div>
+                          <div className="w-1! h-1! rounded-full bg-[#3A53C6]! bottom-0! left-2.5! relative!"></div>
+                        </div>
+                        <span className="">{acc.name}</span>
                       </div>
-                      <div className="w-1! h-1! rounded-full bg-[#3A53C6]! bottom-0! left-2.5! relative!"></div>
-                    </div>
-                    <span className="">{acc.name}</span>
-                  </div>
-                </SelectItem>
-                  ): <SelectItem
-                  value="mt5"
-                  className="h-9! text-xs! text-[#414141]!"
-                >
-                  <div className="flex flex-row h-[inherit]! items-center px-1! ">
-                    <div
-                      className=" w-6! h-6!  bg-cover bg-center mr-2! relative! p-1! rounded-full bg-white! drop-shadow-md!"
-                      // style={{ backgroundImage: `url(${mt5.src})` }}
-                    >
-                      <div className="w-2.5! h-2.5! rounded-full bg-[#3A53C6]! top-0! left-0! relative!">
-
+                    </SelectItem>
+                  ))
+                ) : (
+                  <SelectItem
+                    value="mt5"
+                    className="h-9! text-xs! text-[#414141]!"
+                  >
+                    <div className="flex flex-row h-[inherit]! items-center px-1! ">
+                      <div
+                        className=" w-6! h-6!  bg-cover bg-center mr-2! relative! p-1! rounded-full bg-white! drop-shadow-md!"
+                        // style={{ backgroundImage: `url(${mt5.src})` }}
+                      >
+                        <div className="w-2.5! h-2.5! rounded-full bg-[#3A53C6]! top-0! left-0! relative!"></div>
+                        <div className="w-1! h-1! rounded-full bg-[#3A53C6]! bottom-0! left-2.5! relative!"></div>
                       </div>
-                      <div className="w-1! h-1! rounded-full bg-[#3A53C6]! bottom-0! left-2.5! relative!"></div>
+                      <span className="">No account </span>
                     </div>
-                    <span className="">No account </span>
-                  </div>
-                </SelectItem>
-                }
-                
+                  </SelectItem>
+                )}
 
                 <Button className="w-full  border-[#DDDDDD]! border-[0.5px]! rounded-lg! mt-5!">
                   <div className="text-[#3A53C6]! text-sm!">
@@ -219,18 +216,22 @@ export default function SideBar() {
         </Link>
       </div>
 
-      <div className=" absolute bottom-5! w-full ">
-        <div className="mr-5! w-full max-h-[70px] ">
+      <div className=" absolute! bottom-10!  w-[inherit]!  h-fit!">
+        <div className="mr-5! w-[inherit] max-h-[70px] ">
           <Link
-            href={""}
-            className="flex flex-row mt-1! mr-5! "
+            href={"/dashboard/settings"}
+            className="flex flex-row mt-1! mr-5! w-[inherit] "
             onClick={() => {
               handleSideBarNavigate(5);
             }}
           >
-            {step == 5 ? <Image src={Active} alt="" className="hidden!" /> : <></>}
             {step == 5 ? (
-              <div className="flex flex-row ml-5! px-3! w-full py-2.5! rounded-xl! items-center! bg-[#F3F5FF]">
+              <Image src={Active} alt="" className="hidden!" />
+            ) : (
+              <></>
+            )}
+            {step == 5 ? (
+              <div className="flex flex-row ml-5! px-3! w-[90%] py-2.5! rounded-xl! items-center! bg-[#F3F5FF]">
                 <Image src={Settings} alt="" className="mr-2! " />
                 <span className="font-medium! text-[#3A53C6]">Settings</span>
               </div>
@@ -253,7 +254,11 @@ export default function SideBar() {
               handleSideBarNavigate(6);
             }}
           >
-            {step == 6 ? <Image src={Active} alt="" className="hidden!" /> : <></>}
+            {step == 6 ? (
+              <Image src={Active} alt="" className="hidden!" />
+            ) : (
+              <></>
+            )}
             {step == 6 ? (
               <div className="flex flex-row ml-5! px-3! w-full py-2.5! rounded-xl! items-center! bg-[#F3F5FF]">
                 <Image src={Help} alt="" className="mr-2! " />
@@ -273,28 +278,23 @@ export default function SideBar() {
             )}
           </Link>
         </div>
-        <div className="px-5! w-full mt-8! ">
-          <Link href="" className="  ">
-            <div className="w-full! rounded-xl! px-3! py-2! h-[170px]! flex flex-col! justify-between border-[#DDDDDD]! border-[0.5px]!">
+        <div className="px-5! mt-8! w-full!">
+          <Link href="" className="w-full! block">
+            <div className="rounded-xl px-3! py-3! h-[170px] flex flex-col justify-between border! border-[#DDDDDD]!">
               <div>
                 <span className="text-[#222222] font-medium">
                   Upgrade to{" "}
-                  <span className="px-2! py-1! bg-gray-500  bg-linear-65 from-[#3A53C6] to-[#6F119E] rounded-sm text-white">
-                    {" "}
+                  <span className="px-2! py-1! bg-linear-65 from-[#3A53C6] to-[#6F119E] rounded-sm text-white">
                     PRO
                   </span>
                 </span>
-                <p className="text-sm/tight  mt-2! text-[#686868]">
-                  Gain access to advanced analytics, and deeper insights to make
-                  confident moves
+                <p className="text-sm! mt-2! text-[#686868] w-full! wrap-break-word! leading-tight!">
+                  Gain access to advanced analytics and deeper insights.
                 </p>
               </div>
 
-              <Button
-                className="px-auto! py-5! w-full border-[0.5px]! font-semibold! text-[#414141]! border-[#DDDDDD]! rounded-lg!"
-              >
-                {" "}
-                Get full access <Image src={Rocket} alt=""></Image>
+              <Button className="w-full! border! font-semibold text-[#414141] border-[#DDDDDD]! rounded-lg!">
+                Get full access <Image src={Rocket} alt="" />
               </Button>
             </div>
           </Link>

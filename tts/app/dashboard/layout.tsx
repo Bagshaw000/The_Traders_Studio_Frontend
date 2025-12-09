@@ -24,11 +24,11 @@ export default function DashboardLayout({
     },
   ];
   return (
-    <div className="flex flex-row  gap-5! py-4! px-6! relative w-full! h-full!">
+    <div className="  grid-flow-col grid-cols-6 grid-rows-4 grid gap-6! py-4! px-6! relative h-screen">
       <SideBar></SideBar>
-      <div className=" relative ml-85! w-full! ">
+      <div className=" relative   col-span-5 row-span-4! overflow-y-auto! ">
         <MenuBar />
-        <main className="overflow-auto! w-full!">{children}</main>
+        <main className="  h-[calc(93vh-3.75rem)]">{children}</main>
       </div>
     </div>
   );

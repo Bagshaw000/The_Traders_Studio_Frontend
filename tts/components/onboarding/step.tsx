@@ -27,8 +27,9 @@ export default function Step() {
       ) {
         // Alert they should choose all
       } else {
-        reset();
+        
         redirect("/dashboard");
+        reset();
       }
     }
   };

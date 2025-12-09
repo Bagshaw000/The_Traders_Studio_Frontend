@@ -21,7 +21,8 @@ export default function StepTwo() {
             value="day"
             id="day"
                 className="border! border-[#384A80]! w-4 h-4 rounded-full!
-                 "
+                 data-[state=checked]:border-[#3A53C6]!
+                 data-[state=checked]:bg-[#3A53C6]!"
           />
         </div>
 
