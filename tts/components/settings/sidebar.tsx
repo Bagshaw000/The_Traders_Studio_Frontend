@@ -7,7 +7,7 @@ export default function SideBar() {
   let step = settingBarStore((state) => state.step);
   let setPage = settingBarStore((state) => state.setPage);
   return (
-    <div className="col-span-1 h-full!  rounded-xl border-[#DDDDDD]! border-[0.5px]! bg-white px-5! py-7!">
+    <div className="col-span-1 h-full! text-sm!  rounded-xl border-[#DDDDDD]! border-[0.5px]! bg-white px-5! py-7!">
       <div className="w-full flex-col  flex text-[#686868]">
         <Link href={"#"} onClick={()=>{setPage(1)}} className="w-full mb-3! flex items-center justify-between ">
           {" "}
