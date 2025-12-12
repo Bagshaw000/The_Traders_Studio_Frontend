@@ -1,6 +1,5 @@
 "use client"
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
