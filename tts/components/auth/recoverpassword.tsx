@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authSetupStore, forgotPasswordStore } from "@/app/hook";
 import PasswordField from "../ui/PasswordField";
 import validator from "validator";
@@ -21,11 +21,19 @@ export default function RecoverPassword() {
   const [newPassword, setNewPassword] = useState<string>("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  const searchParams = useSearchParams().get("step")
+  const searchParams = useSearchParams()
 
-  if (searchParams != null){
-    setStep(1)
-  }
+  useEffect(() => {
+    // This runs once after the initial client-side render
+    const nextStep = searchParams.get('step');
+
+    if (nextStep) {
+     
+      setStep(1);
+      // Add client-side logic here (e.g., show a modal, set local storage)
+    }
+  }, [searchParams]);
+
 
   const handleBackToLogin = () => {
     authStore.setStep(3);
@@ -44,7 +52,7 @@ export default function RecoverPassword() {
         setvalidPassword(false);
       }
     }
-    console.log(step);
+    
   };
 
   
