@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import PasswordField from "../ui/PasswordField";
+import OneTapComponent from "@/hooks/auth/google";
 
 export default function Login() {
   let { increase, signUpInfo, step, reset,setStep } = authSetupStore();
@@ -13,6 +14,11 @@ export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const handleGoogleAuth = () => {
+    console.log("Test")
+OneTapComponent()
+  }
   
 
   const handleSubmit = () => {
@@ -76,9 +82,10 @@ export default function Login() {
         <p className="text-xs! text-[#979696]">OR</p>
         <hr className="w-[45%]" />
       </div>
-      <div className="mb-4!">
+      <div className="mb-4! ">
+        {/* <OneTapComponent/> */}
         <Button
-          onClick={() => {}}
+          onClick={handleGoogleAuth}
           className="w-full bg-transparent! text-[#414141]! text-sm!  border-[#DEDEDE]! border! rounded-[5px]!"
         >
           <svg

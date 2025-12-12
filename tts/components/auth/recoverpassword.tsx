@@ -7,6 +7,8 @@ import { useState } from "react";
 import { authSetupStore, forgotPasswordStore } from "@/app/hook";
 import PasswordField from "../ui/PasswordField";
 import validator from "validator";
+import { useSearchParams } from "next/navigation";
+
 
 export default function RecoverPassword() {
   const [email, setEmail] = useState<string>("");
@@ -18,6 +20,12 @@ export default function RecoverPassword() {
   const [password, setPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const searchParams = useSearchParams().get("step")
+
+  if (searchParams != null){
+    setStep(1)
+  }
 
   const handleBackToLogin = () => {
     authStore.setStep(3);
@@ -38,6 +46,8 @@ export default function RecoverPassword() {
     }
     console.log(step);
   };
+
+  
   return (
     <div className="max-w-sm">
       <div className="mb-8!">
